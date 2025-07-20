@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  contract-analyzer:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=gemini-1.5-flash
+      - PINECONE_API_KEY=${PINECONE_API_KEY:-}
+      - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-}
+      - USE_PINECONE=false
+    volumes:
+      - ./contracts:/app/contracts
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.contract-analyzer.rule=Host(`contracts.yourdomain.com`)"
+      - "traefik.http.routers.contract-analyzer.tls=true"
+      - "traefik.http.routers.contract-analyzer.tls.certresolver=letsencrypt"
+
+  # Optional: Redis for caching (production)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    profiles: ["production"]
+
+volumes:
+  redis_data:

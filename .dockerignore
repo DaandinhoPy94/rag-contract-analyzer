@@ -1,0 +1,42 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.pytest_cache
+.venv/
+venv/
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Data directories (will be mounted as volumes)
+data/chroma_db/*
+contracts/uploaded/*
+logs/*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment files
+.env.local
+.env.production

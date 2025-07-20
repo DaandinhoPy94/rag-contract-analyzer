@@ -43,7 +43,7 @@ graph TB
 ### Prerequisites
 
 - Python 3.11+
-- Google Gemini API key
+- Google Gemini API key ([Get here](https://makersuite.google.com/app/apikey))
 - Git
 
 ### Installation
@@ -70,6 +70,7 @@ cp .env.example .env
 ```bash
 # .env
 GEMINI_API_KEY=your-gemini-api-key-here
+GEMINI_MODEL=gemini-1.5-flash
 PINECONE_API_KEY=your-pinecone-key  # Optional: for production
 PINECONE_ENVIRONMENT=your-env       # Optional: for production
 ```
@@ -77,12 +78,34 @@ PINECONE_ENVIRONMENT=your-env       # Optional: for production
 ### Run Application
 
 ```bash
-# Start Streamlit frontend
+# Option 1: Easy launcher
+python start_app.py
+
+# Option 2: Direct Streamlit
 streamlit run frontend/app.py
 
-# Or run with Docker
+# Option 3: Test system first
+python test_system.py
+python test_system.py interactive
+
+# Option 4: Docker
 docker-compose up
 ```
+
+### 🌐 Web Interface
+
+Once running, open your browser to:
+- **Local**: http://localhost:8501
+- **Docker**: http://localhost:8501
+
+### 🎮 Features Overview
+
+1. **📤 Upload Tab**: Upload PDF contracts for processing
+2. **💬 Q&A Tab**: Ask questions about contract content
+3. **⚠️ Risk Analysis Tab**: Identify and assess legal risks  
+4. **📋 Summary Tab**: Generate executive summaries
+5. **✅ Compliance Tab**: Check against Dutch regulations
+6. **📊 Analytics Tab**: View processing insights and metrics
 
 ## 📁 Project Structure
 
